@@ -1,23 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
-
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import Cadastro from "./components/Cadastro";
+import Login from "./components/Login";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ApiDataContextProvider from "./context/ApiContext";
+import { ToastContainer } from "react-toastify";
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApiDataContextProvider>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={false ? <Login /> : <App />} />
+          <Route path="cadastro" element={<Cadastro />} />
+          <Route path="login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </ApiDataContextProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.unregister();
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
