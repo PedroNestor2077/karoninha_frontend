@@ -17,30 +17,34 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import ListaViagens from "../ListaViagens";
-import ViagemCard from "../ViagemCard";
 
-export default function Buscar() {
+export default function Criar() {
   const [dateValue, setDateValue] = useState();
-  const [corridas, setcorridas] = useState([]);
-
   const { apiCall } = useApiData();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const partida = data.get("partida");
     const chegada = data.get("chegada");
-    const body = { partida, chegada, dtHoraPartida: dateValue };
-
-    const viagens = await apiCall.buscaViagem(body);
-    console.log(viagens, "viagens");
-    setcorridas(viagens);
+    const vagas = data.get("vagas");
+    const descricao = data.get("descricao");
+    const body = {
+      partida,
+      chegada,
+      dtHoraPartida: dateValue,
+      vagas,
+      descricao,
+      motorista: "contato.pedronestor2@gmail.com",
+    };
+    console.log(await apiCall.novaViagem(body));
   };
 
   return (
     <Container sx={{ width: "100%", marginTop: "80px" }}>
       <Typography variant="h3" component="h2">
-        Buscar Viagens
+        Nova Viagem
       </Typography>
+
       <Box
         sx={{
           display: "flex",
@@ -69,6 +73,25 @@ export default function Buscar() {
             label="Destino"
             id="chegada"
           />
+          <TextField
+            variant="standard"
+            margin="normal"
+            required
+            fullWidth
+            name="vagas"
+            label="N° Vagas"
+            id="vagas"
+            type="number"
+          />
+          <TextField
+            variant="standard"
+            margin="normal"
+            required
+            fullWidth
+            name="descricao"
+            label="Descricao"
+            id="descricao"
+          />
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="Data Partida"
@@ -85,12 +108,9 @@ export default function Buscar() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Buscar
+            Criar
           </Button>
         </Box>
-        {corridas.map((iten) => (
-          <ViagemCard data={iten} />
-        ))}
       </Box>
     </Container>
   );

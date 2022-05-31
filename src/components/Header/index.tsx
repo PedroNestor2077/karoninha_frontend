@@ -25,6 +25,7 @@ import { BiCog } from "react-icons/bi";
 //import sidebar css from react-pro-sidebar module and our custom css
 import "react-pro-sidebar/dist/css/styles.css";
 import "./Header.css";
+import { Link } from "react-router-dom";
 
 const Header = ({ components, setPage, menuCollapse, setMenuCollapse }) => {
   //create initial menuCollapse state using useState hook
@@ -43,7 +44,7 @@ const Header = ({ components, setPage, menuCollapse, setMenuCollapse }) => {
           <SidebarHeader>
             <div className="logotext">
               {/* small and big change using menucollapse state */}
-              <p>{menuCollapse ? "K" : "K"}</p>
+              <img src="logo3.png" style={{ width: "80px" }}></img>
             </div>
           </SidebarHeader>
           <SidebarContent>
@@ -64,7 +65,9 @@ const Header = ({ components, setPage, menuCollapse, setMenuCollapse }) => {
           </SidebarContent>
           <SidebarFooter>
             <Menu iconShape="square">
-              <MenuItem icon={<FiLogOut />}>Logout</MenuItem>
+              <MenuItem icon={<FiLogOut />}>
+                <Link to={"/login"}></Link>
+              </MenuItem>
             </Menu>
           </SidebarFooter>
         </ProSidebar>

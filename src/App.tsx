@@ -13,8 +13,8 @@ import {
 import { GrCar } from "react-icons/gr";
 import { MdTravelExplore, MdAccountCircle } from "react-icons/md";
 import BuscaViagem from "./components/BuscaViagem";
+import CriarViagem from "./components/CriarViagem";
 function App() {
-  const [page, setPage] = useState(<h1>page</h1>);
   const [menuCollapse, setMenuCollapse] = useState(false);
   const headerComponents = [
     {
@@ -24,7 +24,7 @@ function App() {
     },
     {
       name: "Nova Viagem",
-      value: <h1>Nova viagem</h1>,
+      value: <CriarViagem></CriarViagem>,
       icon: <GrCar />,
     },
     {
@@ -33,6 +33,8 @@ function App() {
       icon: <MdAccountCircle />,
     },
   ];
+  const [page, setPage] = useState(headerComponents[0].value);
+
   return (
     <div className="App">
       <Box

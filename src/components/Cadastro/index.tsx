@@ -26,6 +26,7 @@ export default function Cadastro() {
       sobreNome: data.get("segundoNome"),
       cpf: data.get("cpf"),
       cnh: data.get("cnh") ? data.get("cnh") : null,
+      telefone: data.get("telefone"),
     };
     const isUserCreated = await apiCall.novoUsuario(body);
     if (isUserCreated) navigate("/login");
@@ -42,12 +43,11 @@ export default function Cadastro() {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <AccountCircleIcon />
-        </Avatar>
+        <img src="logo3.png" style={{ width: "80px" }}></img>
         <Typography component="h1" variant="h5">
-          Cadastre-se
+          <b>Karoninha</b> Cadastro
         </Typography>
+
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 0 }}>
           <TextField
             margin="normal"
@@ -104,6 +104,17 @@ export default function Cadastro() {
             margin="normal"
             required
             fullWidth
+            id="telefone"
+            label="N° Telefone"
+            name="telefone"
+            autoComplete="telefone"
+            autoFocus
+            type="number"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             id="cnh"
             label="CNH (Opcional)"
             name="cnh"
@@ -122,7 +133,7 @@ export default function Cadastro() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="/login" variant="body2">
                 {"Ja possui uma conta? Entrar"}
               </Link>
             </Grid>

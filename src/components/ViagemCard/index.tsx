@@ -16,15 +16,16 @@ import { AiFillCar } from "react-icons/ai";
 import { BsWhatsapp } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard(props) {
   const [expanded, setExpanded] = React.useState(false);
-
+  const { partida, chegada, dtHoraPartida, motorista, vagas, descricao } =
+    props.data;
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Card sx={{ width: "70%" }}>
+    <Card sx={{ width: "70%", marginTop: "10px" }}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -37,16 +38,16 @@ export default function RecipeReviewCard() {
             color="text.secondary"
             style={{ marginLeft: "20px" }}
           >
-            <b>Pedro Nestor</b>
+            {motorista.nome}
           </Typography>
         }
-        title="Pratapolis a Franca"
-        subheader="04/02/2022"
+        title={`${partida} à ${chegada}`}
+        subheader={dtHoraPartida}
       />
 
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a per
+          {descricao}
         </Typography>
       </CardContent>
       <CardActions
@@ -58,11 +59,11 @@ export default function RecipeReviewCard() {
           color="text.secondary"
           style={{ marginLeft: "20px" }}
         >
-          Vagas: 5
+          Vagas: {vagas}
         </Typography>
         <IconButton>
           <a
-            href="https://api.whatsapp.com/send?phone=35997412678"
+            href={`https://api.whatsapp.com/send?phone=${motorista.telefone}`}
             target="_blank"
           >
             <BsWhatsapp color="green" />

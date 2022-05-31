@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useApiData } from "../../context/ApiContext";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props: any) {
   return (
@@ -34,12 +35,17 @@ function Copyright(props: any) {
 
 export default function SignIn() {
   const { apiCall } = useApiData();
+  const navigate = useNavigate();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get("email");
     const senha = data.get("password");
-    apiCall.login({ email, senha });
+    const log = await apiCall.login({ email, senha });
+    if (log) {
+      navigate("/app");
+    }
   };
 
   return (
@@ -53,11 +59,9 @@ export default function SignIn() {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <img src="logo3.png" style={{ width: "80px" }}></img>
         <Typography component="h1" variant="h5">
-          Fazer Login
+          <b>Karoninha</b> login
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField

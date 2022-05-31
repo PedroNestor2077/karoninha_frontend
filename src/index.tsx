@@ -23,9 +23,10 @@ ReactDOM.render(
       />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={false ? <Login /> : <App />} />
+          <Route path="/" element={true ? <Login /> : <App />} />
           <Route path="cadastro" element={<Cadastro />} />
           <Route path="login" element={<Login />} />
+          <Route path="app" element={<App />} />
         </Routes>
       </BrowserRouter>
     </ApiDataContextProvider>
